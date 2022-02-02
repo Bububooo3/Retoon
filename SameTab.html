@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang='en' class=''>
+  <head>
+    <meta charset='UTF-8'>
+    <title>Retoon: Toon Search</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/x-icon" href="/images/icon-128.ico">
+    <style>
+        body {
+        background-color: #a09450;
+        margin: 200px 40%;
+      }
+
+      form {
+        background-color: #bec298;
+        width: 300px;
+        height: 44px;
+        border-radius: 5px;
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+      }
+
+      input {
+        all: unset;
+        font: 16px system-ui;
+        color: #fff;
+        height: 100%;
+        width: 100%;
+        padding: 6px 10px;
+      }
+
+      ::placeholder {
+        color: #fff;
+        opacity: 0.7; 
+      }
+
+      svg {
+        color: #fff;
+        fill: currentColor;
+        width: 24px;
+        height: 24px;
+        padding: 10px;
+      }
+
+      button {
+        all: unset;
+        cursor: pointer;
+        width: 44px;
+        height: 44px;
+      }
+      * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Indie Flower', cursive;
+  font-size: 17px;
+  font-weight: 2;
+}
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
+
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+
+#myBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#myBtn:hover {
+  background: rgb(95, 95, 95);
+  color: black;
+  border-radius: 4px;
+}
+    </style>
+  </head>
+  <body>
+      
+    <video autoplay muted="false" loop id="myVideo">
+        <source src="toon2bg.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+      
+      <div class="content">
+        <h1>Retoon</h1>
+        <p>The Toonator Search Engine you never knew you needed.</p>
+        <form role="search" id="form">
+            <input type="search" id="query" name="q" placeholder="Toons..." aria-label="Search through site content">
+            <button>
+              🌐
+            </button>
+          </form>
+          <br>
+          <br>
+          <form role="search" id="userform">
+              <input type="search" id="userquery" name="q" placeholder="Users..." aria-label="Search for users">
+              <button> ✏️
+              </button>
+            </form>
+          <script>
+            const f = document.getElementById('form');
+            const d = document.getElementById('userform');
+            const q = document.getElementById('query');
+            const u = document.getElementById('userquery');
+            const tag = 'https://toonator.com/tag/';
+            const user = 'https://toonator.com/user/';
+      
+            function tagsubmitted(event) {
+              event.preventDefault();
+              const url = tag + q.value;
+              const win = window.open(url, '_self');
+              chrome.tabs.create({active: true, url: url});
+              win.focus();
+            }
+      
+            function usersubmitted(event) {
+              event.preventDefault();
+              const url = user + u.value;
+              const win = window.open(url, '_self');
+              chrome.tabs.create({active: true, url: url});
+              win.focus();
+            }
+      
+            f.addEventListener('submit', tagsubmitted);
+            d.addEventListener('submit', usersubmitted);
+          </script>
+      </div>
+      
+      <script>
+      var video = document.getElementById("myVideo");
+      var btn = document.getElementById("myBtn");
+      
+      function myFunction() {
+        if (video.paused) {
+          video.play();
+          btn.innerHTML = "Pause";
+        } else {
+          video.pause();
+          btn.innerHTML = "Play";
+        }
+      }
+      </script>
+  </body>
+</html>
